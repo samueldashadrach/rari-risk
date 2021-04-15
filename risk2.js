@@ -32,15 +32,40 @@ const queryUniswap = async(id, blockno) => {
 				body: JSON.stringify( {query: str} ),
 				headers: { "Content-Type": "application/json" }
 			}
-		).then((res) => res.json());
+		).then((res) => res.json())
+		.catch((err) => err.json());
 		point = response.data.pair;
-		console.log(point);
 		point.blockno = blockno;
 		return parse(point);
 	} catch(error){
 		console.error(error);
 	}
 };
+
+const querymany = async(id, blockend, no_blocks) => {
+
+	data = [];
+	done = 0;
+
+	for(blockno = blockend - no_blocks; blockno < blockend; ++blockno)
+		{
+			queryUniswap(id,blockno).then(
+				value => {
+					data.push(value);
+					++done;
+					console.log(value,done);
+					if(done == no_blocks)
+					{
+						work(data);
+					}
+				},
+				error => {
+					console.log(error.toJSON());
+					process.exit();
+				}
+			);
+		}
+}
 
 
 function parse(point){
@@ -51,31 +76,29 @@ function parse(point){
 	return point;
 }
 
-const id =
-//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // WETH-USDT
-"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
-const blockend = 12244180;
-const no_blocks = 1000;
+function sleep(milliseconds) {
+	console.log("sleeping");
+	const date = Date.now();
+	let currentDate = null;
+	do {
+    	currentDate = Date.now();
+	} while (currentDate - date < milliseconds);
+	console.log("waking up");
+}
 
-function main(){
-	data = [];
-	done = 0;
+const main = async() => {
+	
+	const id =
+	//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // WETH-USDT
+	"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
+	const END = 12244180;
+	const no_blocks = 500;
 
-	for(blockno = blockend - no_blocks; blockno < blockend; ++blockno)
+	for(blockend = END; true ; blockend -= no_blocks)
 	{
-		queryUniswap(id,blockno).then(
-			value => {
-				data.push(value);
-				++done;
-				console.log(done);
-				if(done == no_blocks)
-					work(data);
-			},
-			error => {
-				console.log(error.toJSON());
-				process.exit();
-			}
-		);
+		console.log("a");
+		f = await querymany(id,blockend,no_blocks);
+		sleep(10000);
 	}
 }
 
@@ -93,21 +116,20 @@ function work(data){
 	data.sort(biggerblockno);
 	console.log(data);
 
-	minliq(data);
-
+	minliquidity = minliq(data);
+	console.log(minliquidity);
 }
 
 function minliq(data){
 	min = data[0].reserve0;
-	for(i=1; i < no_blocks; i++)
+	for(i=1; i < data.length; i++)
 	{
 		if(data[i].reserve0 < min)
 			min = data[i].reserve0;
 	}
-	console.log(min);
 	return min;
 }
 
 
 
-main(); // pssst..
+main();
