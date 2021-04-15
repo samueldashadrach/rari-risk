@@ -27,34 +27,83 @@ const queryUniswap = async(id, blockno) => {
 	try{
 		const result = await axios.post(
 			"https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2",
-			{
-				query: str
-			}
+			{ query: str },
+			{ timeout: 0 }
+
 		);
-		k = result.data.data.pair;
-		k.blockno = String(blockno);
-		return k;
+		point = result.data.data.pair;
+		point.blockno = blockno;
+		return parse(point);
 	} catch(error){
 		console.error(error);
 	}
 };
 
-function main(){
-	id = "0x0dacb47e00aed6abade32c7b398e029393e0d848";
-	blockstart = 12244083;
-	blockend = 12244185;
-	data = [];
 
-	for(blockno = blockstart; blockno < blockend; blockno+=1)
+function parse(point){
+	point.reserve0 = parseFloat(point.reserve0);
+	point.reserve1 = parseFloat(point.reserve1);
+	point.token0Price = parseFloat(point.token0Price);
+	point.token1Price = parseFloat(point.token1Price);
+	return point;
+}
+
+const id =
+//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // WETH-USDT
+"0x0dacb47e00aed6abade32c7b398e029393e0d848"; //
+const blockend = 12244180;
+const no_blocks = 500;
+
+function main(){
+	data = [];
+	done = 0;
+
+	for(blockno = blockend - no_blocks; blockno < blockend; ++blockno)
 	{
 		queryUniswap(id,blockno).then(
 			value => {
-				console.log(value);
 				data.push(value);
+				++done;
+				console.log(done);
+				if(done == no_blocks)
+					work(data);
+			},
+			error => {
+				console.log(error);
 			}
 		);
 	}
 }
+
+function biggerblockno(a,b)
+{
+	if(a.blockno > b.blockno)
+		return 1;
+	else  if(a.blockno < b.blockno)
+		return -1;
+	else
+		return 0;
+}
+
+function work(data){
+	data.sort(biggerblockno);
+	console.log(data);
+
+	minliq(data);
+
+}
+
+function minliq(data){
+	min = data[0].reserve0;
+	for(i=1; i < no_blocks; i++)
+	{
+		if(data[i].reserve0 < min)
+			min = data[i].reserve0;
+	}
+	console.log(min);
+	return min;
+}
+
 
 
 main(); // pssst..
