@@ -1,6 +1,6 @@
 // source: https://www.youtube.com/watch?v=l2rzT_Dp4T0&ab_channel=EatTheBlocks
 
-const axios = require("axios");
+const fetch = require('node-fetch');
 
 const queryUniswap = async(id, blockno) => {
 	str = `
@@ -25,13 +25,16 @@ const queryUniswap = async(id, blockno) => {
 	}`;
 
 	try{
-		const result = await axios.post(
+		const response = await fetch(
 			"https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2",
-			{ query: str },
-			{ timeout: 100000 }
-
-		);
-		point = result.data.data.pair;
+			{
+				method: "post",
+				body: JSON.stringify( {query: str} ),
+				headers: { "Content-Type": "application/json" }
+			}
+		).then((res) => res.json());
+		point = response.data.pair;
+		console.log(point);
 		point.blockno = blockno;
 		return parse(point);
 	} catch(error){
