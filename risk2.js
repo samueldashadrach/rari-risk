@@ -1,4 +1,4 @@
-// source: https://www.youtube.com/watch?v=l2rzT_Dp4T0&ab_channel=EatTheBlocks
+// resource: https://www.youtube.com/watch?v=l2rzT_Dp4T0&ab_channel=EatTheBlocks
 
 const fetch = require('node-fetch');
 
