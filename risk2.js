@@ -30,7 +30,8 @@ const queryUniswap = async(id, blockno) => {
 		{
 			method: "post",
 			body: JSON.stringify( {query: str} ),
-			headers: { "Content-Type": "application/json" }
+			headers: { "Content-Type": "application/json" },
+			timeout: 50000,
 		}
 	).then((res) => res.json())
 
@@ -90,7 +91,7 @@ function parse(point){
 }
 
 function sleep(milliseconds) {
-	console.log("sleeping");
+	console.log("sleeping for " + milliseconds + " ms");
 	const date = Date.now();
 	let currentDate = null;
 	do {
@@ -111,8 +112,7 @@ const main = async() => {
 	{
 		console.log("new batch, blockend: " + blockend);
 		await querymany(id,blockend,no_blocks);
-		sleep(30000);
-		
+		sleep(10000);
 	}
 }
 
