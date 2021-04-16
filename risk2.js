@@ -132,6 +132,11 @@ function work(data){
 
 	minliquidity = minliq(data);
 	console.log("Min liquidity: " + minliquidity);
+
+	period = 68; // 68 blocks of 13.2 seconds is 15 min
+	
+	shocks = maxminshock(data, period);
+	console.log("shocks: " + JSON.stringify(shocks));
 }
 
 const INF = 1000000000000000;
@@ -149,6 +154,99 @@ function minliq(data){
 		}
 	}
 	return min;
+}
+
+function maxminshock(data, period){ // hope this code is correct :/
+
+	var shocks = 
+	{
+		max: {
+			val: 0,
+			i: -1,
+			front: -1,
+			back: -1,
+		},
+
+		min: {
+			val: 0,
+			i: -1,
+			front: -1,
+			back: -1,
+		}
+	};
+
+	active = 0; // number of datapoints without error in the current period
+	sum = 0;
+
+	twap = 0;
+	shock = 0;
+	front = 0;
+	back = 0;
+
+	n = data.length
+	if (i < n)
+		return -1;
+	else {
+		
+		for(i = 0; i < period; ++i)
+		{
+			try {
+				sum += data[i].token0Price;
+				++active;
+			}
+			catch {
+				;
+			}
+		}
+		console.log(sum);
+
+		for(;i < n; ++i) {
+
+			try{
+				back = data[i -  period].token0Price;
+				sum = sum - back;
+				--active;
+			}
+			catch{
+				;
+			}
+
+			try{
+				front = data[i].token0Price;
+				sum = sum + front;
+				++active;
+
+			}
+			catch{
+				;
+			}
+
+			twap = sum / active;
+			shock = (front - twap) / front;
+			
+			console.log(sum, active, shock);
+			
+			if(shock > shocks.max.val)
+			{
+				shocks.max.val = shock;
+				shocks.max.i = i;
+				shocks.max.front = front;
+				shocks.max.back = back;
+			}
+			else if (shock < shocks.min.val)
+			{
+				shocks.min.val = shock;
+				shocks.min.i = i;
+				shocks.min.front = front;
+				shocks.min.back = back;
+			}	
+			else
+				;
+		}
+
+		return shocks;
+
+	}
 }
 
 
