@@ -24,28 +24,28 @@ const queryUniswap = async(id, blockno) => {
 	    
 	}`;
 
-	try{
-		const response = await fetch(
-			"https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2",
-			{
-				method: "post",
-				body: JSON.stringify( {query: str} ),
-				headers: { "Content-Type": "application/json" }
-			}
-		).then((res) => res.json())
-		.catch((err) => err.json());
-		point = response.data.pair;
-		point.blockno = blockno;
-		return parse(point);
-	} catch(error){
-		console.error(error);
-	}
+	
+	const response = await fetch(
+		"https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2",
+		{
+			method: "post",
+			body: JSON.stringify( {query: str} ),
+			headers: { "Content-Type": "application/json" }
+		}
+	).then((res) => res.json())
+
+	point = response.data.pair;
+	point.blockno = blockno;
+	return parse(point);
 };
 
 const querymany = async(id, blockend, no_blocks) => {
 
+	await new Promise((resolve) => {
+
 	data = [];
 	done = 0;
+	failed = 0;
 
 	for(blockno = blockend - no_blocks; blockno < blockend; ++blockno)
 		{
@@ -53,18 +53,31 @@ const querymany = async(id, blockend, no_blocks) => {
 				value => {
 					data.push(value);
 					++done;
-					console.log(value,done);
-					if(done == no_blocks)
+					console.log(value);
+
+					console.log("done: " + done);
+					console.log("failed: " + failed);		
+					if(done + failed >= no_blocks)
 					{
 						work(data);
+						resolve(true);
 					}
 				},
 				error => {
-					console.log(error.toJSON());
-					process.exit();
+					++failed;
+					console.log(error);
+
+					console.log("done: " + done);
+					console.log("failed: " + failed);
+					if(done + failed >= no_blocks)
+					{
+						work(data);
+						resolve(true);
+					}
 				}
 			);
 		}
+	});
 }
 
 
@@ -96,9 +109,10 @@ const main = async() => {
 
 	for(blockend = END; true ; blockend -= no_blocks)
 	{
-		console.log("a");
-		f = await querymany(id,blockend,no_blocks);
-		sleep(10000);
+		console.log("new batch, blockend: " + blockend);
+		await querymany(id,blockend,no_blocks);
+		sleep(30000);
+		
 	}
 }
 
@@ -114,18 +128,25 @@ function biggerblockno(a,b)
 
 function work(data){
 	data.sort(biggerblockno);
-	console.log(data);
+	//console.log(data);
 
 	minliquidity = minliq(data);
-	console.log(minliquidity);
+	console.log("Min liquidity: " + minliquidity);
 }
 
+const INF = 1000000000000000;
+
 function minliq(data){
-	min = data[0].reserve0;
-	for(i=1; i < data.length; i++)
+	min = INF;
+	for(i=0; i < data.length; i++)
 	{
-		if(data[i].reserve0 < min)
-			min = data[i].reserve0;
+		try {
+			if(data[i].reserve0 < min)
+				min = data[i].reserve0;
+		}
+		catch (err) {
+			console.log(data[i]);
+		}
 	}
 	return min;
 }
