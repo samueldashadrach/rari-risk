@@ -10,6 +10,6 @@ a) min(liquidity)
 
 b) max(price - twap(price)) and min(price - twap(price))
 
-a matters for liquidation slippage and b matters for margin of safety for liquidations
+a matters for liquidation slippage and b matters for price shock
 
 Model: https://hackmd.io/@rari/SkHFrVVUd
