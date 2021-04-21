@@ -14,6 +14,6 @@ a matters for liquidation slippage and b matters for price shock
 
 instead of getting b, have just queried price every 15 minute and checking max movement of price in 15 min. no twap
 
-Model: https://hackmd.io/@rari/SkHFrVVUd
+[Model](https://hackmd.io/@rari/SkHFrVVUd)
 
-Backtest results: #obtained-data.txt
+[Backtests](obtained-data.txt)
