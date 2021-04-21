@@ -101,7 +101,8 @@ const querymany = async(id, blockend, no_segments) => {
 						}
 						if(result.shocks.max.val > MAXSHOCK){
 							MAXSHOCK = result.shocks.max.val;
-						}						
+						}
+						console.log("MINLIQ           MAXSHOCK            MINSHOCK");
 						console.log(MINLIQ, MAXSHOCK, MINSHOCK);
 						resolve(true);
 					}
@@ -134,14 +135,20 @@ const main = async() => {
 	
 	const id =
 	//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // WETH-USDT
-	"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
-	const END = 12244180;
+	//"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
+	//"0x73e02eaab68a41ea63bdae9dbd4b7678827b2352"; // INV-ETH
+	"0x3d07f6e1627da96b8836190de64c1aed70e3fc55"; // SGT-ETH
+
+
+
+	const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
 	const no_segments = 500;
 
 	for(blockend = END; true ; blockend -= no_segments * period)
 	{
 		console.log("new batch, blockend: " + blockend);
 		await querymany(id,blockend,no_segments);
+		console.log("batch completed, blockend: " + blockend);
 		sleep(10000);
 	}
 }
@@ -205,7 +212,7 @@ function maxminshock(data) {
 	console.log(data);
 
 	for ( i = 1; i < data.length; ++i) {
-		shock = data[i].token0Price - data[i-1].token0Price;
+		shock = (data[i].token0Price - data[i-1].token0Price)/data[i].token0Price;
 		if ( shock > shocks.max.val){
 			shocks.max.val = shock;
 			shocks.max.i = i;
