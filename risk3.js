@@ -137,8 +137,8 @@ const main = async() => {
 	//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // WETH-USDT
 	//"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
 	//"0x73e02eaab68a41ea63bdae9dbd4b7678827b2352"; // INV-ETH
-	"0x3d07f6e1627da96b8836190de64c1aed70e3fc55"; // SGT-ETH
-
+	//"0x3d07f6e1627da96b8836190de64c1aed70e3fc55"; // SGT-ETH
+	"0xfaad1072e259b5ed342d3f16277477b46d379abc"; // DEGEN-ETH
 
 
 	const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
