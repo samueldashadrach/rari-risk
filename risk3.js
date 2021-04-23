@@ -79,7 +79,8 @@ const querymany = async(id, blockend, no_segments) => {
 						}
 						if(result.shocks.max.val > MAXSHOCK){
 							MAXSHOCK = result.shocks.max.val;
-						}						
+						}
+						console.log("MINLIQ                 MAXSHOCK                  MINSHOCK");						
 						console.log(MINLIQ, MAXSHOCK, MINSHOCK);
 						resolve(true);
 					}
@@ -102,7 +103,7 @@ const querymany = async(id, blockend, no_segments) => {
 						if(result.shocks.max.val > MAXSHOCK){
 							MAXSHOCK = result.shocks.max.val;
 						}
-						console.log("MINLIQ           MAXSHOCK            MINSHOCK");
+						console.log("MINLIQ                 MAXSHOCK                  MINSHOCK");
 						console.log(MINLIQ, MAXSHOCK, MINSHOCK);
 						resolve(true);
 					}
@@ -134,12 +135,19 @@ function sleep(milliseconds) {
 const main = async() => {
 	
 	const id =
-	//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // WETH-USDT
+	//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // ETH-USDT
 	//"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
 	//"0x73e02eaab68a41ea63bdae9dbd4b7678827b2352"; // INV-ETH
 	//"0x3d07f6e1627da96b8836190de64c1aed70e3fc55"; // SGT-ETH
-	"0xfaad1072e259b5ed342d3f16277477b46d379abc"; // DEGEN-ETH
-
+	//"0xfaad1072e259b5ed342d3f16277477b46d379abc"; // DEGEN-ETH
+	//"0xdc2b82bc1106c9c5286e59344896fb0ceb932f53"; // RGT-ETH
+	//"0xc76225124f3caab07f609b1d147a31de43926cd6"; // SFI-ETH
+	//"0xbb2b8038a1640196fbe3e38816f3e67cba72d940"; // WBTC-ETH
+	//"0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC-ETH
+	//"0xce84867c3c02b05dc570d0135103d3fb9cc19433"; // SUSHI-ETH
+	//"0x4d96369002fc5b9687ee924d458a7e5baa5df34e"; // MPH-ETH
+	"0xcd7989894bc033581532d2cd88da5db0a4b12859"; // WBTC-BADGER
+	
 
 	const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
 	const no_segments = 500;
