@@ -146,8 +146,17 @@ const main = async() => {
 	//"0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC-ETH
 	//"0xce84867c3c02b05dc570d0135103d3fb9cc19433"; // SUSHI-ETH
 	//"0x4d96369002fc5b9687ee924d458a7e5baa5df34e"; // MPH-ETH
-	"0xcd7989894bc033581532d2cd88da5db0a4b12859"; // WBTC-BADGER
-	
+	//"0xcd7989894bc033581532d2cd88da5db0a4b12859"; // WBTC-BADGER
+	//"0x1ffc57cada109985ad896a69fbcebd565db4290e"; // FTM-ETH
+	//"0x1273ad5d8f3596a7a39efdb5a4b8f82e8f003fc3"; // HEGIC-ETH
+	//"0x87febfb3ac5791034fd5ef1a615e9d9627c2665d"; // KP3R-ETH
+	//"0xa2107fa5b38d9bbd2c461d6edf11b11a50f6b974"; // LINK-ETH
+	//"0x2fdbadf3c4d5a8666bc06645b8358ab803996e28"; // YFI-ETH
+	//"0xdfc14d2af169b0d36c4eff567ada9b2e0cae044f"; // AAVE-ETH
+	//"0x88d97d199b9ed37c29d846d00d443de980832a22"; // UMA-ETH
+	//"0x0d0d65e7a7db277d3e0f5e1676325e75f3340455"; // MPH-ETH
+	"0x2e81ec0b8b4022fac83a21b2f2b4b8f5ed744d70"; // ETH-GRT
+
 
 	const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
 	const no_segments = 500;
