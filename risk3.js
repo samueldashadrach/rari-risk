@@ -3,7 +3,18 @@
 const fetch = require('node-fetch');
 
 
+
 const period = 68; // 68 blocks of 13.2 seconds is 15 min
+const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
+const no_segments = 500;
+
+
+/*
+const period = 340; // 68 blocks of 13.2 seconds is 15 min, 340 is 5 oracle periods
+const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
+const no_segments = 500;
+*/
+
 const INF = 1000000000000000;
 
 const queryUniswap = async(id, blockno) => {
@@ -163,12 +174,13 @@ const main = async() => {
 	//"0xcffdded873554f362ac02f8fb1f02e5ada10516f"; // COMP-ETH
 	//"0xc2adda861f89bbb333c90c492cb837741916a225"; // MKR-ETH
 	//"0x43ae24960e5534731fc831386c07755a2dc33d47"; // SNX-ETH
-	"0x3da1313ae46132a397d90d95b1424a9a7e3e0fce"; // ETH-CRV
+	//"0x3da1313ae46132a397d90d95b1424a9a7e3e0fce"; // ETH-CRV
+	//"0x4d5ef58aac27d99935e5b6b4a6778ff292059991"; // DPI-ETH
+	//"0x4d3c5db2c68f6859e0cd05d080979f597dd64bff"; // MVI-ETH
+	"0x60b2cc2c6ecd3dd89b4fd76818ef83186e2f2931"; // ALPHA-ETH
 
 
-	const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
-	const no_segments = 500;
-
+	
 	for(blockend = END; true ; blockend -= no_segments * period)
 	{
 		console.log("new batch, blockend: " + blockend);

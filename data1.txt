@@ -11,19 +11,31 @@ Reference
 11500000 Dec-22-2020 12:27:49 AM +UTC
 
 -----
-Sushiswap exclusives: ALCX, YAM, COVER
+Sushiswap exclusives: ALCX, YAM, COVER, INDEX
 
 -----
 
 manually sorted by shock (sort of) 
 
-END = 12278500
+const period = 68; // 68 blocks of 13.2 seconds is 15 min
+const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
+const no_segments = 500;
+
 
 Pair name
 blockend
 MINLIQ MAXSHOCK MINSHOCK
 
 -----
+
+DPI-ETH
+12006500
+64000 0.030 -0.025
+11800000
+64000 0.041 -0.030
+11500000
+64000 0.041 -0.030
+
 
 WBTC-ETH
 12006500
@@ -195,6 +207,17 @@ KP3R-ETH
 3700 0.15 -0.16
 
 
+ALPHA-ETH
+12000000
+155000 0.117 -0.069
+11800000
+155000 0.117 -0.107
+11600000
+46800 0.125 -0.154
+11496500
+46800 0.70 -2.3
+
+
 ETH-CRV
 12100000
 2100 0.16 -0.094
@@ -289,3 +312,7 @@ INV-ETH
 307 0.15 -0.28
 12006500
 4 0.26 -1.02
+
+MVI-ETH
+12200000
+396 0.33 -0.23
