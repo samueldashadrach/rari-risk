@@ -4,19 +4,12 @@ const prompt = require('prompt-sync')();
 
 const INF = 1000000000000000;
 
-/*
+
 const period = 68; // 68 blocks of 13.2 seconds is 15 min
 const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
 const no_segments = 500;
 const LI = 0.15 // 15% liq incentive
 const slippage = 0.10 // 10% slippage
-*/
-
-const period = 68; // 68 blocks of 13.2 seconds is 15 min
-const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
-const no_segments = 500;
-const LI = 0.10 // 10% liq incentive
-const slippage = 0.05 // 5% slippage
 
 
 
@@ -30,9 +23,9 @@ const id =
 	//"0xfaad1072e259b5ed342d3f16277477b46d379abc"; // DEGEN-ETH
 	//"0xdc2b82bc1106c9c5286e59344896fb0ceb932f53"; // RGT-ETH
 	//"0xc76225124f3caab07f609b1d147a31de43926cd6"; // SFI-ETH
-	"0xbb2b8038a1640196fbe3e38816f3e67cba72d940"; // WBTC-ETH
+	//"0xbb2b8038a1640196fbe3e38816f3e67cba72d940"; // WBTC-ETH
 	//"0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC-ETH
-	//"0xce84867c3c02b05dc570d0135103d3fb9cc19433"; // SUSHI-ETH
+	"0xce84867c3c02b05dc570d0135103d3fb9cc19433"; // SUSHI-ETH
 	//"0x4d96369002fc5b9687ee924d458a7e5baa5df34e"; // MPH-ETH
 	//"0xcd7989894bc033581532d2cd88da5db0a4b12859"; // WBTC-BADGER
 	//"0x1ffc57cada109985ad896a69fbcebd565db4290e"; // FTM-ETH
