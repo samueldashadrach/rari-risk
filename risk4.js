@@ -1,23 +1,36 @@
 
 const fetch = require('node-fetch');
+const prompt = require('prompt-sync')();
 
+const INF = 1000000000000000;
 
+/*
 const period = 68; // 68 blocks of 13.2 seconds is 15 min
 const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
 const no_segments = 500;
 const LI = 0.15 // 15% liq incentive
 const slippage = 0.10 // 10% slippage
+*/
+
+const period = 68; // 68 blocks of 13.2 seconds is 15 min
+const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
+const no_segments = 500;
+const LI = 0.10 // 10% liq incentive
+const slippage = 0.05 // 5% slippage
+
+
+
 // Note: always set slippage > 3.5% for single hop on uniswap and slippage > 7% for two hop
 
 const id =
 	//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // ETH-USDT
-	"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
+	//"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
 	//"0x73e02eaab68a41ea63bdae9dbd4b7678827b2352"; // INV-ETH
 	//"0x3d07f6e1627da96b8836190de64c1aed70e3fc55"; // SGT-ETH
 	//"0xfaad1072e259b5ed342d3f16277477b46d379abc"; // DEGEN-ETH
 	//"0xdc2b82bc1106c9c5286e59344896fb0ceb932f53"; // RGT-ETH
 	//"0xc76225124f3caab07f609b1d147a31de43926cd6"; // SFI-ETH
-	//"0xbb2b8038a1640196fbe3e38816f3e67cba72d940"; // WBTC-ETH
+	"0xbb2b8038a1640196fbe3e38816f3e67cba72d940"; // WBTC-ETH
 	//"0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC-ETH
 	//"0xce84867c3c02b05dc570d0135103d3fb9cc19433"; // SUSHI-ETH
 	//"0x4d96369002fc5b9687ee924d458a7e5baa5df34e"; // MPH-ETH
@@ -43,8 +56,6 @@ const id =
 	//"0x4d3c5db2c68f6859e0cd05d080979f597dd64bff"; // MVI-ETH
 	//"0x60b2cc2c6ecd3dd89b4fd76818ef83186e2f2931"; // ALPHA-ETH
 
-
-const INF = 1000000000000000;
 
 const queryUniswap = async(id, blockno) => {
 	str = `
@@ -129,6 +140,7 @@ const querymany = async(blockend) => {
 						
 						console.log("TOKEN0DOWN (max)        TOKEN1DOWN (max)");						
 						console.log(TOKEN0DOWN, TOKEN1DOWN);
+
 						resolve(true);
 					}
 				},
@@ -174,7 +186,8 @@ const main = async() => {
 		console.log("new batch, blockend: " + blockend);
 		await querymany(blockend);
 		console.log("batch completed, blockend: " + blockend);
-		sleep(10000);
+		//temp = prompt("press enter");
+		sleep(5000);
 	}
 }
 
