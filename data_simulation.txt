@@ -1,0 +1,21 @@
+const period = 68; // 68 blocks of 13.2 seconds is 15 min
+const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
+const no_segments = 500;
+const LI = 0.15 // 15% liq incentive
+const slippage = 0.10 // 10% slippage
+
+----------------------------------------
+
+USDC-ETH
+11496500
+RESERVE0LIQ (min)       RESERVE1LIQ (min)
+52238620.17327 49559.57727502793
+TOKEN0DOWN (max)        TOKEN1DOWN (max)
+0.07112699708205512 0.049283892276734166
+
+INV-ETH
+12040500
+RESERVE0LIQ (min)       RESERVE1LIQ (min)
+307.2298351414034 201.82802602616601
+TOKEN0DOWN (max)        TOKEN1DOWN (max)
+0.2048087870009836 0.1922424574837392

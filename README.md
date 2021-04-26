@@ -2,18 +2,21 @@
 
 Run using nodejs
 
+`node risk4.js`
+
+does full simulation. for each block, assuming liquidation needs to happen there. iterate and check if price drops more than LI - slippage. when price does not drop by more than LI - slippage, assume liquidation happens. check total price drop from when liquidation was supposed to happen.
+
+[](data_simulation.txt)
+
+--------------------------------------------------------------------
+
 `node risk3.js`
 
-In some historical period for a given pair, trying to get:
-
-a) min(liquidity)
-
-b) max(price - twap(price)) and min(price - twap(price))
-
-a matters for liquidation slippage and b matters for price shock
-
-instead of getting b, have just queried price every 15 minute and checking max movement of price in 15 min. no twap
+gets max price movement in 15 min in both directions 
+also gets min liquidity
 
 [Model](https://hackmd.io/@rari/SkHFrVVUd)
 
-[Backtests](obtained-data.txt)
+[](data_simple.txt)
+
+
