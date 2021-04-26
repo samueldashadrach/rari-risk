@@ -129,7 +129,6 @@ const querymany = async(blockend) => {
 						
 						console.log("TOKEN0DOWN (max)        TOKEN1DOWN (max)");						
 						console.log(TOKEN0DOWN, TOKEN1DOWN);
-						console.log("Recommended CF < 1 - LI - TOKEN(X)DOWN")
 						resolve(true);
 					}
 				},

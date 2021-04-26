@@ -4,7 +4,9 @@ Run using nodejs
 
 `node risk4.js`
 
-does full simulation. for each block, assuming liquidation needs to happen there. iterate and check if price drops more than LI - slippage. when price does not drop by more than LI - slippage, assume liquidation happens. check total price drop from when liquidation was supposed to happen.
+Does full simulation. For each period, assume liquidation needs to happen there. Iterate and check if price drops more than LI - slippage in every subsequent period. When price does not drop by more than LI - slippage, assume liquidation happens. Check total price drop from when liquidation was supposed to happen to when it happens.
+
+Recommended CF < 1 - LI - (% drop observed from simulation)
 
 [data_simulation](data_simulation.txt)
 
@@ -13,6 +15,7 @@ does full simulation. for each block, assuming liquidation needs to happen there
 `node risk3.js`
 
 gets max price movement in 15 min in both directions 
+
 also gets min liquidity
 
 [Model](https://hackmd.io/@rari/SkHFrVVUd)
