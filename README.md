@@ -6,7 +6,7 @@ Run using nodejs
 
 does full simulation. for each block, assuming liquidation needs to happen there. iterate and check if price drops more than LI - slippage. when price does not drop by more than LI - slippage, assume liquidation happens. check total price drop from when liquidation was supposed to happen.
 
-[](data_simulation.txt)
+[data_simulation](data_simulation.txt)
 
 --------------------------------------------------------------------
 
@@ -17,6 +17,4 @@ also gets min liquidity
 
 [Model](https://hackmd.io/@rari/SkHFrVVUd)
 
-[](data_simple.txt)
-
-
+[data_simple](data_simple.txt)
