@@ -6,7 +6,8 @@ Run using nodejs
 
 Does full simulation. For each period, assume liquidation needs to happen there. Iterate and check if price drops more than LI - slippage in every subsequent period. When price does not drop by more than LI - slippage, assume liquidation happens. Check total price drop from when liquidation was supposed to happen to when it happens.
 
-Recommended CF < 1 - LI - (% drop observed from simulation)
+TOKEN(x)DOWN = max % drop in token(x) observed from simulation, from when liquidation should happen to when it happens
+Recommended CF < 1 - LI - TOKEN(x)DOWN
 
 [data_simulation](data_simulation.txt)
 
