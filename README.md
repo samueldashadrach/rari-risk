@@ -10,7 +10,7 @@ TOKEN(x)DOWN = max % drop in token(x) observed from simulation, from when liquid
 
 Recommended CF < 1 - LI - TOKEN(x)DOWN
 
-[Improved model](https://hackmd.io/@rari/rJjp3KNw_
+[Improved model](https://hackmd.io/@rari/rJjp3KNw_)
 
 [data_simulation](data_simulation.txt)
 
