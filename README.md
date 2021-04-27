@@ -22,6 +22,6 @@ gets max price movement in 15 min in both directions
 
 also gets min liquidity
 
-[Model](https://hackmd.io/@rari/SkHFrVVUd)
+[Old Model](https://hackmd.io/@rari/SkHFrVVUd)
 
 [data_simple](data_simple.txt)
