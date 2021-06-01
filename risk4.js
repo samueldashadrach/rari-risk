@@ -4,19 +4,32 @@ const prompt = require('prompt-sync')();
 
 const INF = 1000000000000000;
 
-
+/*
 const period = 68; // 68 blocks of 13.2 seconds is 15 min
 const END = 12278500; // Apr-20-2021 05:54:09 PM +UTC
 const no_segments = 500;
 const LI = 0.15 // 15% liq incentive
 const slippage = 0.10 // 10% slippage
+*/
+/*
+const period = 68; // 68 blocks of 13.2 seconds is 15 min
+const END = 12398064;
+const no_segments = 500;
+const LI = 0.08 // 8% liq incentive
+const slippage = 0.03 // 3% slippage
+*/
 
-
+const period = 68; // 68 blocks of 13.2 seconds is 15 min
+const END = 12510000;
+const no_segments = 500;
+const LI = 0.015 // 15% liq incentive
+const slippage = 0.07 // 7% slippage
 
 // Note: always set slippage > 3.5% for single hop on uniswap and slippage > 7% for two hop
 
 const id =
-	//"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // ETH-USDT
+	//"0x4028daac072e492d34a3afdbef0ba7e35d8b55c4"; // stETH-ETH
+	"0x0d4a11d5eeaac28ec3f61d100daf4d40471f1852"; // ETH-USDT
 	//"0x0dacb47e00aed6abade32c7b398e029393e0d848"; // SOCKS-ETH
 	//"0x73e02eaab68a41ea63bdae9dbd4b7678827b2352"; // INV-ETH
 	//"0x3d07f6e1627da96b8836190de64c1aed70e3fc55"; // SGT-ETH
@@ -27,7 +40,7 @@ const id =
 	//"0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"; // USDC-ETH
 	//"0xce84867c3c02b05dc570d0135103d3fb9cc19433"; // SUSHI-ETH
 	//"0x4d96369002fc5b9687ee924d458a7e5baa5df34e"; // MPH-ETH
-	"0xcd7989894bc033581532d2cd88da5db0a4b12859"; // WBTC-BADGER
+	//"0xcd7989894bc033581532d2cd88da5db0a4b12859"; // WBTC-BADGER
 	//"0x1ffc57cada109985ad896a69fbcebd565db4290e"; // FTM-ETH
 	//"0x1273ad5d8f3596a7a39efdb5a4b8f82e8f003fc3"; // HEGIC-ETH
 	//"0x87febfb3ac5791034fd5ef1a615e9d9627c2665d"; // KP3R-ETH
@@ -257,12 +270,20 @@ function simulateshock(data) {
 
 		for( j = 0; i+j+1 < data.length ; ++j) // check whether liquidation feasible at i+j+1
 		{
+			if(j > 5){ // AAAAAAAAAAAAAAAAAAAAA DEBUG!!!
+				//console.log(i,j,data[i],data[i+j]);
+
+			}
+
 			if( (data[i+j].token1Price - data[i+j+1].token1Price) / data[i].token1Price < LI - slippage) // liquidation feasible
 			{
 				token1down = ( data[i].token1Price - data[i+j+1].token1Price ) / data[i].token1Price;
-				//console.log(i,j,token1down);
+
+				console.log(i,j,"liquidashun"); // debug
+
 				if(token1down > shocks.token1down) {
 					shocks.token1down = token1down;
+
 				}
 				break;
 			}

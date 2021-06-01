@@ -1,6 +1,10 @@
 Reference
 
-12278500 Apr-20-2021 05:54:09 PM +UTC // This is the END
+12510000 May-26-2021 12:41:04 PM +UTC // This is the new END
+12500000 May-24-2021 11:17:42 PM +UTC
+12400000 May-09-2021 11:51:43 AM +UTC
+12300000 Apr-24-2021 01:36:34 AM +UTC
+12278500 Apr-20-2021 05:54:09 PM +UTC // This is an old END
 12200000 Apr-08-2021 03:32:41 PM +UTC
 12100000 Mar-24-2021 06:34:20 AM +UTC
 12000000 Mar-08-2021 08:20:16 PM +UTC
@@ -12,6 +16,22 @@ Reference
 
 -----
 Sushiswap exclusives: ALCX, YAM, COVER, INDEX
+
+-------------------------------------------------------
+
+const period = 68; // 68 blocks of 13.2 seconds is 15 min
+const END = 12510000;
+const no_segments = 500;
+const LI = 0.015 // 15% liq incentive
+const slippage = 0.07 // 7% slippage
+
+
+
+
+
+
+
+
 
 -------------------------------------------------------
 
